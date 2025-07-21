@@ -203,8 +203,7 @@ public class Client implements ActionListener {
         text.setText("");
 
         // Force refresh and then scroll
-        f.revalidate();
-        f.repaint();
+        //f.repaint();
 
         SwingUtilities.invokeLater(()->{
             JScrollBar verticalBar=scrollPane.getVerticalScrollBar();
@@ -216,6 +215,7 @@ public class Client implements ActionListener {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+        f.revalidate();
 
     }
 
