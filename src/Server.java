@@ -14,6 +14,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+//ActionEvent is when something happens like button click a report is generated
+//ActionListener is added to that button that was clicked when you want something to happen
+//MouseAdapter is better MouseListener as it allows to focus on any specific action like mouse click
+//MouseEvent is any mouse action
 
 public class Server implements ActionListener {
     JTextField text;
@@ -98,7 +102,7 @@ public class Server implements ActionListener {
         p2= new JPanel();//second panel for text part
         p2.setLayout(new BorderLayout());//BorderLayout lets you place things at the NORTH, SOUTH, EAST, WEST, or CENTER of a container(p2).
 
-        // Create scroll pane and add p2 to it
+        // Create scroll pane and add p2 to it bcz we want scroll bar in p2 , this creates scroll bar
         scrollPane = new JScrollPane(p2);
         scrollPane.setBounds(5,75,440,560);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -110,7 +114,7 @@ public class Server implements ActionListener {
         text.setFont(new Font("SAN_SERIF",Font.PLAIN,22));
 
 
-// --- NEW CODE STARTS HERE ---
+// --- NEW CODE STARTS HERE --- for starting with capital letter in the text box
         text.getDocument().addDocumentListener(new DocumentListener() {
             // This flag helps us prevent an accidental endless loop
             // because changing the text inside the listener would trigger it again!
@@ -200,7 +204,7 @@ public class Server implements ActionListener {
         //right.setBackground(Color.DARK_GRAY);
         right.add(p3,BorderLayout.LINE_END);//put messages on right
         vertical.add(right);//put messages in vertical axis
-        vertical.add(javax.swing.Box.createVerticalStrut(15));//adds gap between messages
+        vertical.add(Box.createVerticalStrut(15));//adds gap between messages
 
         //p2.add(vertical,BorderLayout.PAGE_END);//this puts messages at bottom of panel p2
         //p2.add(vertical,BorderLayout.LINE_START);//this put messages on left top
@@ -219,10 +223,15 @@ public class Server implements ActionListener {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+        //or catch (Exception ex) {
+        //            ex.printStackTrace();
+        //        }
 
-        f.repaint();//reloads the frame
-        f.invalidate();
-        f.validate();
+//        f.repaint();//reloads the frame for new  visual change
+//        f.invalidate();// tells JFrame to rethink after any size change of component
+//        f.validate();//this makes those changes by rearranging everything
+// or just below line
+        f.revalidate();//does all three things
 
 
 
@@ -231,7 +240,8 @@ public class Server implements ActionListener {
 
     public static JPanel formatLabel(String ext){
         JPanel panel=new JPanel();
-        panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));//x axis put time stamp after message on right side
+        panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));//x-axis put time stamp after message on right side but this
+        //puts content along y-axis
 
         //JLabel output= new JLabel(ext);
         JLabel output= new JLabel("<html><p style=\"width:100px\">"+ext+"</p></html>");
